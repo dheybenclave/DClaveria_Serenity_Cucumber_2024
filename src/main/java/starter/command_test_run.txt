@@ -1,1 +1,1 @@
-mvn verify -D"cucumber.filter.tags=@form_testing" //Run specific scripts tags
+mvn clean verify -D"cucumber.filter.tags=@form_testing" //Run specific scripts tags
