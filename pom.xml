@@ -9,6 +9,45 @@
 
     <name>DheoClaveria Automation Testing</name>
 
+    <repositories>
+        <repository>
+            <id>dheyClaveria</id>
+            <url>https://pkgs.dev.azure.com/dheyClaveria/_packaging/dheyClaveria/maven/v1</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>dheyClaveria</id>
+            <url>https://pkgs.dev.azure.com/dheyClaveria/_packaging/dheyClaveria/maven/v1</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </distributionManagement>
+
+    <pluginRepositories>
+        <pluginRepository>
+                <id>dheyClaveria</id>
+                <url>https://pkgs.dev.azure.com/dheyClaveria/_packaging/dheyClaveria/maven/v1</url>
+                <releases>
+                    <enabled>true</enabled>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <serenity.version>4.1.12</serenity.version>
