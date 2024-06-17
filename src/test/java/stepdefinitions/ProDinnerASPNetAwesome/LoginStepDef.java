@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.UserCredentials;
 
-public class LoginPage extends UIInteractions {
+public class LoginStepDef extends UIInteractions {
     public static Logger logger = LoggerFactory.getLogger(Thread.currentThread().getStackTrace()[1].getClassName());
 
     CommonStepDef commonStepDef;
@@ -52,4 +52,6 @@ public class LoginPage extends UIInteractions {
                 break;
         }
     }
+
+
 }
