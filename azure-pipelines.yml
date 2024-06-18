@@ -43,6 +43,7 @@ steps:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
+    options: 'clean install'
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     # publishJUnitResults: true
@@ -58,7 +59,7 @@ steps:
               options: 'clean verify -D"cucumber.filter.tags"="${{ parameters.tag }}"'
               publishJUnitResults: true
               testResultsFiles: '**/SERENITY-JUNIT-*.xml'
-              testRunTitle: 'Prod UI Tests'
+              # testRunTitle: 'Prod UI Tests'
               ${{ if and(eq(variables['Agent.OS'], 'Linux'), not(contains(parameters.pool, 'vmss'))) }}:
                 javaHomeOption: 'Path'
                 jdkVersionOption: 1.11
