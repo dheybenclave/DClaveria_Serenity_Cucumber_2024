@@ -22,6 +22,7 @@ parameters:
   displayName: Browser
   values:
     - chrome
+    - edge
   default: chrome
 
 - name: headless
@@ -56,7 +57,7 @@ steps:
               mavenPomFile: 'pom.xml'
               goals: 'test'
               # options: 'clean verify -Denvironment="${{ parameters.environment }}" -D"cucumber.filter.tags"="${{ parameters.tag }}" -D"headless.mode"="${{ parameters.headless }} -Daccess=$(DOOR_ACCESS)'
-              options: 'clean verify -D"cucumber.filter.tags"="${{ parameters.tag }}"'
+              options: 'clean verify -D"cucumber.filter.tags"="${{ parameters.tag }}" -Denvironment="${{ parameters.browser }}"'
               publishJUnitResults: true
               testResultsFiles: '**/SERENITY-JUNIT-*.xml'
               # testRunTitle: 'Prod UI Tests'
