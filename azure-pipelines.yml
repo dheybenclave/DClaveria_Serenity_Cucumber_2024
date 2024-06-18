@@ -3,6 +3,11 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+parameters:
+- name: result
+  type: string
+  default: '**/target/site/serenity/'
+  
 trigger:
 - master
 
@@ -29,3 +34,12 @@ steps:
 - task: PublishCodeCoverageResults@2
   inputs:
     summaryFileLocation: 'target/site/serenity/serenity-summary.html' 
+    
+- task: PublishPipelineArtifact@1
+  condition: succeededOrFailed() 
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
+    fileSharePath: ${{ parameters.result }}
+
+    
