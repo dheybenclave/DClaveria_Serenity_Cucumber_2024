@@ -55,7 +55,7 @@ steps:
               mavenPomFile: 'pom.xml'
               goals: 'test'
               # options: 'clean verify -Denvironment="${{ parameters.environment }}" -D"cucumber.filter.tags"="${{ parameters.tag }}" -D"headless.mode"="${{ parameters.headless }} -Daccess=$(DOOR_ACCESS)'
-              options: 'mvn clean verify -D"cucumber.filter.tags"="${{ parameters.tag }}"'
+              options: 'clean verify -D"cucumber.filter.tags"="${{ parameters.tag }}"'
               publishJUnitResults: true
               testResultsFiles: '**/SERENITY-JUNIT-*.xml'
               testRunTitle: 'Prod UI Tests'
