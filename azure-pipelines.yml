@@ -10,7 +10,7 @@ parameters:
 - name: tag
   displayName: Tag
   type: string
-  default: '@UI'
+  default: '@CRUD'
 
 - name: environment
   displayName: Environment
