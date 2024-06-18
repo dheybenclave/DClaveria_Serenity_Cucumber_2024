@@ -10,6 +10,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -38,8 +39,6 @@ public class ParameterDefinitions extends PageObject {
     void teardown() {
         driver1.quit();
     }
-
-
 
     @Before
     public void setTheStage() {
