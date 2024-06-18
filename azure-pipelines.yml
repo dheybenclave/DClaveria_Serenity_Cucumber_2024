@@ -22,6 +22,7 @@ parameters:
   displayName: Browser
   values:
     - chrome
+    - edge
   default: chrome
 
 - name: headless
