@@ -1,5 +1,7 @@
 package stepdefinitions;
 
+import actors.ActorLists;
+import net.serenitybdd.core.pages.PageComponent;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.screenplay.Performable;
@@ -7,9 +9,10 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Open;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.BaseClass;
 
 
-public class NavigateTo extends UIInteractions {
+public class NavigateTo extends PageComponent {
     public static Logger logger = LoggerFactory.getLogger(NavigateTo.class);
 
     public static Performable thePage(String homePage) {

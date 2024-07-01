@@ -2,7 +2,7 @@ package pages.ProDinnerPage;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 
-public class MealPage extends CommonPage {
+public class MealPage extends CommonProDinnerPage {
 
     static String PARENT_HEADER = "//main[@class='main cont']";
     public WebElementFacade BTN_CREATE() {return $(PARENT_HEADER + "//button[@class='awe-btn' and text()='Create']");}

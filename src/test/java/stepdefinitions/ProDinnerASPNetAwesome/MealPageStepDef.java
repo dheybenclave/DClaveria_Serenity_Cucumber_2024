@@ -2,15 +2,17 @@ package stepdefinitions.ProDinnerASPNetAwesome;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
+import net.serenitybdd.core.pages.PageComponent;
 import net.serenitybdd.core.steps.UIInteractions;
 import pages.ProDinnerPage.MealPage;
 import stepdefinitions.CommonStepDef;
+import utils.BaseClass;
 import utils.Utilities;
 
 import java.util.List;
 import java.util.Map;
 
-public class MealPageStepDef extends UIInteractions {
+public class MealPageStepDef extends PageComponent {
 
     CommonStepDef commonStepDef;
     MealPage mealPage;
@@ -25,8 +27,8 @@ public class MealPageStepDef extends UIInteractions {
         commonStepDef.testStep(String.format("Create Meal : dataTableList %s", dataTableList));
 
         for (Map<String, String> e : dataTableList) {
-            String name = String.format("%s_%s" ,e.get("Name") , utils.generateRandomStringInteger(5));
-            String comments = String.format("%s_%s" ,e.get("Comments") , utils.generateRandomStringInteger(5));
+            String name = String.format("%s_%s", e.get("Name"), utils.generateRandomStringInteger(5));
+            String comments = String.format("%s_%s", e.get("Comments"), utils.generateRandomStringInteger(5));
 
             commonStepDef.testStep(String.format("dataTableList | Name : '%s' | Comments : '%s'", name, comments));
 
@@ -35,17 +37,18 @@ public class MealPageStepDef extends UIInteractions {
             commonStepDef.enterText(mealPage.TXT_COMMENT(), comments, 2000);
             commonStepDef.clickElement(mealPage.BTN_SAVE());
         }
-//        dataTableList.stream().forEach(e -> {
-//                    String name = e.get("Name");
-//                    String comments = e.get("Comments");
-//                    commonStepDef.testStep(String.format("dataTableList | Name : '%s' | Comments : '%s'", name, comments));
-//
-//                    commonStepDef.clickElement(mealPage.BTN_CREATE());
-//                    commonStepDef.setInputValue(mealPage.TXT_NAME(), name, 2000);
-//                    commonStepDef.enterText(mealPage.TXT_COMMENT(), comments, 2000);
-//                    commonStepDef.clickElement(mealPage.BTN_SAVE());
-//                }
-//        );
+        // dataTableList.stream().forEach(e -> {
+        // String name = e.get("Name");
+        // String comments = e.get("Comments");
+        // commonStepDef.testStep(String.format("dataTableList | Name : '%s' | Comments
+        // : '%s'", name, comments));
+        //
+        // commonStepDef.clickElement(mealPage.BTN_CREATE());
+        // commonStepDef.setInputValue(mealPage.TXT_NAME(), name, 2000);
+        // commonStepDef.enterText(mealPage.TXT_COMMENT(), comments, 2000);
+        // commonStepDef.clickElement(mealPage.BTN_SAVE());
+        // }
+        // );
         verifyMeal(dataTableList);
     }
 
@@ -54,4 +57,5 @@ public class MealPageStepDef extends UIInteractions {
         dataTableList.forEach(e -> commonStepDef.verifyTextInPage(e.get("Name"), e.get("Comments")));
     }
 
+       
 }

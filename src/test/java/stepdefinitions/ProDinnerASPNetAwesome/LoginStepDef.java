@@ -1,20 +1,20 @@
 package stepdefinitions.ProDinnerASPNetAwesome;
 
 import io.cucumber.java.en.Given;
-import net.serenitybdd.core.steps.UIInteractions;
+import net.serenitybdd.core.pages.PageComponent;
 import net.serenitybdd.screenplay.Actor;
-import pages.ProDinnerPage.CommonPage;
+import pages.ProDinnerPage.CommonProDinnerPage;
 import pages.ProDinnerPage.SignInPage;
 import stepdefinitions.CommonStepDef;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.UserCredentials;
 
-public class LoginStepDef extends UIInteractions {
+public class LoginStepDef extends PageComponent {
     public static Logger logger = LoggerFactory.getLogger(Thread.currentThread().getStackTrace()[1].getClassName());
 
     CommonStepDef commonStepDef;
-    CommonPage commonPage;
+    CommonProDinnerPage commonPage;
     SignInPage signInPage;
 
     String _username, _password = "";
@@ -22,6 +22,7 @@ public class LoginStepDef extends UIInteractions {
     @Given("{actor} is login in {}")
     public void LoginUser(Actor actor, String page) {
         commonStepDef._actor = actor;
+
         commonStepDef.navigatePage(actor, page);
         commonStepDef.clickElement(commonPage.LNK_SIGN_IN());
 

@@ -1,9 +1,9 @@
 package pages.ProDinnerPage;
 
-import net.serenitybdd.core.pages.PageComponent;
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.core.steps.UIInteractions;
 
-public class CommonPage extends PageComponent {
+public class CommonProDinnerPage extends UIInteractions {
     static String PARENT_HEADER = "//div[@id='header']//*[@role='navigation']";
 
     //    @FindBy(xpath = "//a[@href='/Account/SignIn']")
