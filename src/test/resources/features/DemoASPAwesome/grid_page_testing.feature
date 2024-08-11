@@ -25,8 +25,8 @@ Feature: Grid Filtering Testing
       | Id   | Person | Food   | Country      | Date      | Location | Chef         |
       | 1435 | Tracy  | Banana | La Croisette | 8/15/2015 | Tavern   | Hercules Oat |
     Examples:
-      | Page               |
-      | DEMOASPAWESOMEPAGE |
+      | Page           |
+      | DEMOASPAWESOME |
 
 
 

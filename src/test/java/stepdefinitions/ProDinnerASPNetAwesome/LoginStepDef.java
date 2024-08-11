@@ -19,14 +19,13 @@ public class LoginStepDef extends PageComponent {
 
     String _username, _password = "";
 
-    @Given("{actor} is login in {}")
-    public void LoginUser(Actor actor, String page) {
-        commonStepDef._actor = actor;
+    @Given("{} is login in {}")
+    public void LoginUser(String actor, String page) {
 
-        commonStepDef.navigatePage(actor, page);
+        commonStepDef.navigatePage(page);
         commonStepDef.clickElement(commonPage.LNK_SIGN_IN());
 
-        commonStepDef.testStep(String.format("I login in the application as %s", actor.getName()));
+        commonStepDef.testStep(String.format("I login in the application as %s", actor));
         GetCredentials(actor);
         commonStepDef.enterText(signInPage.TXT_USERNAME(), _username, 2000);
         commonStepDef.enterText(signInPage.TXT_PASSWORD(), _password, 2000);
@@ -36,11 +35,11 @@ public class LoginStepDef extends PageComponent {
 
     }
 
-    private void GetCredentials(Actor actor) {
+    private void GetCredentials(String actor) {
 
-        logger.info(String.format("Get Credentials of %s", actor.getName()));
+        logger.info(String.format("Get Credentials of %s", actor));
 
-        switch (actor.getName()) {
+        switch (actor) {
             case "ProDinnerAdmin":
                 _username = UserCredentials.ProDinnerAdmin.getUsername();
                 _password = UserCredentials.ProDinnerAdmin.getPassword();

@@ -6,8 +6,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.pages.PageComponent;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
+import net.serenitybdd.screenplay.actions.UnknownPageException;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
 import org.openqa.selenium.JavascriptExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,16 +27,14 @@ public class CommonStepDef extends PageComponent {
     public CommonProDinnerPage commonProDinnerPage;
     public CommonDemoASPAwesomePage commonDEMOAWESOMEPage;
     public DemoASPAwesomePage demoASPAwesemoPage;
-    public Actor _actor;
     public String mainwindow;
     public Set<String> s1;
     public Iterator<String> i1;
 
 
-    @Given("{actor} is navigating in {}")
-    public void navigatePage(Actor actor, String page) {
-        _actor = actor;
-        _actor.wasAbleTo(NavigateTo.thePage(page));
+    @Given("Tester is navigating in {}")
+    public void navigatePage(String page) {
+        this.thePage(page);
         Ensure.thatTheCurrentPage().currentUrl();
     }
 
@@ -73,6 +73,18 @@ public class CommonStepDef extends PageComponent {
             verifyVisibilityofElement(commonDEMOAWESOMEPage.PAGE_CONTROL_LABEL(expectedElementText));
         }
     }
+
+    public void thePage(String pageName) {
+        String pageUrl = EnvironmentSpecificConfiguration.from(SystemEnvironmentVariables.currentEnvironmentVariables())
+                .getOptionalProperty("pages." + pageName.toLowerCase())
+                .orElse(SystemEnvironmentVariables.currentEnvironmentVariables().getProperty("pages." + pageName.toLowerCase()));
+        if (pageUrl == null) {
+            throw new UnknownPageException("No page defined with the name '" + pageUrl + "'");
+        }
+        testStep(String.format("Navigate Page to %s", pageName));
+        this.getDriver().get(pageUrl);
+    }
+
 
     public void generatedSwitchHandler() {
         testStep(String.format("Generated Switch Handler"));

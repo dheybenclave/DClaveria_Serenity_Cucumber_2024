@@ -22,17 +22,17 @@ public class ParameterDefinitions extends PageComponent {
     ActorLists actorLists;
     PageObject pageObject;
 
-    @ParameterType(".*")
-    public Actor actor(String actorName) {
-        actorName = actorName.isEmpty() ? "tester" : actorName;
-        return OnStage.theActorCalled(actorName);
-    }
-
-
-    @Before
-    public void setTheStage() {
-        OnStage.setTheStage(new OnlineCast());
-    }
+//    @ParameterType(".*")
+//    public Actor actor(String actorName) {
+//        actorName = actorName.isEmpty() ? "tester" : actorName;
+//        return OnStage.theActorCalled(actorName);
+//    }
+//
+//
+//    @Before
+//    public void setTheStage() {
+//        OnStage.setTheStage(new OnlineCast());
+//    }
 
 
 }

@@ -1,12 +1,10 @@
 package utils;
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import stepdefinitions.ParameterDefinitions;
@@ -16,9 +14,8 @@ public class BaseClass extends PageObject {
     public WebDriver driver1;
 
     @Before
-    @SuppressWarnings("unchecked")
     public void setUp() throws Exception {
-
+//
 //        WebDriverManager webDriverManager;
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--start-maximized");
@@ -34,9 +31,21 @@ public class BaseClass extends PageObject {
 //        this.setDriver(driver1);
     }
 
+
     @After
     public void tearDown() throws Exception {
+
         this.getDriver().close();
+        System.out.println("Teardown Close Done");
         this.getDriver().quit();
+        System.out.println("Teardown Quit Done");
+
+    }
+
+    @AfterAll
+    public static void tearDownKiller() throws Exception {
+        // Kill the ChromeDriverService process
+//        Runtime.getRuntime().exec("taskkill /F /IM ChromeDriver.exe");
+//        System.out.println("Teardown Kill Process Done");
     }
 }

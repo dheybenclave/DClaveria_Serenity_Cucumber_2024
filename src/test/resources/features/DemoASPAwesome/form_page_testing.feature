@@ -5,7 +5,7 @@ Feature: Form Page Testing Controls
     Given Tester is navigating in <Page>
     Examples:
       | Page                   |
-      | DEMOASPAWESOMEPAGE     |
-      | WIKIHOMEPAGE           |
+      | DEMOASPAWESOME         |
+      | WIKI                   |
       | PRODINNERASPNETAWESOME |
 
