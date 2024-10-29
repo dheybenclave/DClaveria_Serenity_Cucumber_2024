@@ -14,10 +14,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.CommonPage;
-import pages.DemoASPNETAwesome.CommonDemoASPAwesomePage;
-import pages.DemoASPNETAwesome.DemoASPAwesomePage;
-import pages.ProDinnerPage.CommonProDinnerPage;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -26,9 +22,7 @@ public class CommonStepDef extends PageComponent {
     public static Logger logger = LoggerFactory.getLogger(CommonStepDef.class);
     private int CLIENT_CODE_STACK_INDEX;
     public CommonPage commonPage;
-    public CommonProDinnerPage commonProDinnerPage;
-    public CommonDemoASPAwesomePage commonDEMOAWESOMEPage;
-    public DemoASPAwesomePage demoASPAwesemoPage;
+
     public String mainwindow;
     public Set<String> s1;
     public Iterator<String> i1;
@@ -38,33 +32,6 @@ public class CommonStepDef extends PageComponent {
     public void navigatePage(String page) {
         this.thePage(page);
         Ensure.thatTheCurrentPage().currentUrl();
-    }
-
-    @Given("I go to {} > {} > {} modules")
-    public void iNavigateToSubGroup(String group, String subPage, String subPageItem) {
-
-        if (!group.isEmpty()) {
-            testStep(String.format("the element %s in the page", group));
-            clickElement(commonDEMOAWESOMEPage.NAVIGATE_MODULE_PARENT(group));
-            CollapaseMenu(commonDEMOAWESOMEPage.NAVIGATE_MODULE_PARENT(group));
-
-        }
-        if (!subPage.isEmpty()) {
-            testStep(String.format("the element %s in the page", subPage));
-            clickElement(commonDEMOAWESOMEPage.NAVIGATE_MODULE_SUB(subPage));
-            CollapaseMenu(commonDEMOAWESOMEPage.NAVIGATE_MODULE_SUB(subPage));
-        }
-        if (!subPageItem.isEmpty()) {
-            testStep(String.format("the element %s in the page", subPageItem));
-            clickElement(commonDEMOAWESOMEPage.NAVIGATE_MODULE_SUB(subPageItem));
-        }
-
-    }
-
-    @When("I verify the element navigation search box in the page")
-    public void iTheElementNavigation_search_txtboxInThePage() {
-        waitABit(2000);
-        verifyVisibilityofElement(demoASPAwesemoPage.NAVIGATION_SEARCH_TXTBOX());
     }
 
     @And("I verify the following text in the page :")
