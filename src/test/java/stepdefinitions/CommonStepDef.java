@@ -13,6 +13,7 @@ import net.thucydides.model.environment.SystemEnvironmentVariables;
 import org.openqa.selenium.JavascriptExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.CommonPage;
 import pages.DemoASPNETAwesome.CommonDemoASPAwesomePage;
 import pages.DemoASPNETAwesome.DemoASPAwesomePage;
 import pages.ProDinnerPage.CommonProDinnerPage;
@@ -24,6 +25,7 @@ import java.util.Set;
 public class CommonStepDef extends PageComponent {
     public static Logger logger = LoggerFactory.getLogger(CommonStepDef.class);
     private int CLIENT_CODE_STACK_INDEX;
+    public CommonPage commonPage;
     public CommonProDinnerPage commonProDinnerPage;
     public CommonDemoASPAwesomePage commonDEMOAWESOMEPage;
     public DemoASPAwesomePage demoASPAwesemoPage;
@@ -70,7 +72,7 @@ public class CommonStepDef extends PageComponent {
         List<String> expectedElementTextList = dataTable.asList();
         testStep(String.format("I verify the following text in the page : %s", expectedElementTextList));
         for (String expectedElementText : expectedElementTextList) {
-            verifyVisibilityofElement(commonDEMOAWESOMEPage.PAGE_CONTROL_LABEL(expectedElementText));
+            verifyVisibilityofElement(commonPage.PAGE_CONTROL_LABEL(expectedElementText));
         }
     }
 
@@ -111,6 +113,16 @@ public class CommonStepDef extends PageComponent {
         shouldBeVisible(element);
     }
 
+    public void clickBackPage() {
+        testStep(String.format("Click Back/Previous Button Page"));
+        this.getDriver().navigate().back();
+    }
+
+    public void clickRefreshPage() {
+        testStep(String.format("Click Back/Previous Button Page"));
+        this.getDriver().navigate().refresh();
+    }
+
     public void verifyPresenceofElement(WebElementFacade element) {
         testStep(String.format(String.format("Verify the Presence of the element %s in the page", element)));
         testStep(String.format("the element %s is %s", element, element.isDisplayed()));
@@ -122,6 +134,27 @@ public class CommonStepDef extends PageComponent {
         verifyVisibilityofElement(element);
         waitABit(2000);
         element.click();
+    }
+
+    public void clickElementIfExist(WebElementFacade element) {
+        testStep(String.format("Click for Element if Exist '%s'", element));
+
+        if (element.isVisible() && element.isPresent()) {
+            verifyVisibilityofElement(element);
+            waitABit(2000);
+            element.click();
+        }
+
+    }
+
+    public void clickTextIfExist(String elementText) {
+        testStep(String.format("Click for Element if Exist '%s'", elementText));
+        clickElementIfExist(commonPage.LBL_FIELD(elementText));
+    }
+
+    public void clickTextWithParentSelectorIfExist(String parentSelector, String elementText) {
+        testStep(String.format("Click for Element if Exist '%s'", elementText));
+        clickElementIfExist(commonPage.LBL_FIELD_WITH_PARENT_SELECTOR(parentSelector, elementText));
     }
 
     public void enterText(WebElementFacade element, String value, int waitForMilliSec) {
@@ -139,6 +172,7 @@ public class CommonStepDef extends PageComponent {
         waitABit(waitForMilliSec);
     }
 
+
     public void setInputValue(WebElementFacade element, String value, int waitForMilliSec) {
         testStep(String.format("Set Value '%s' with Value %s", element, value));
         this.setAttibute(element, "value", value, waitForMilliSec);
@@ -155,8 +189,31 @@ public class CommonStepDef extends PageComponent {
     public void verifyTextInPage(String... textList) {
         for (String currText : textList) {
             testStep(String.format("verify the text in the page :%s", textList));
-            verifyVisibilityofElement(commonProDinnerPage.TXT_FIELD(currText));
+            verifyVisibilityofElement(commonPage.LBL_FIELD(currText));
         }
+    }
+
+    public void verifyTextInPageWithParentSelector(String parentSelector, String... textList) {
+        for (String currText : textList) {
+            testStep(String.format("verify the text in the page :%s", textList));
+            verifyVisibilityofElement(commonPage.LBL_FIELD_WITH_PARENT_SELECTOR(parentSelector, currText));
+        }
+    }
+
+
+    public void CollapaseMenu(WebElementFacade element, String identifierValue) {
+        testStep(String.format("Collapse Menu : '%s'", element));
+        identifierValue = identifierValue.length() > 0 ? identifierValue : "collapsed";
+        element.shouldBePresent();
+        waitABit(1500);
+        String getClassValue = element.getAttribute("class");
+        if (!getClassValue.contains(identifierValue)) {
+            element.click();
+            waitABit(2000);
+        } else {
+            testStep(String.format("Element : '%s' already expanded/opened", element));
+        }
+        waitABit(2000);
     }
 
     public void CollapaseMenu(WebElementFacade element) {
@@ -172,7 +229,14 @@ public class CommonStepDef extends PageComponent {
         waitABit(2000);
     }
 
+
+    public void AcceptAllCookiesPage() {
+        testStep("AccepAllCookiesPage");
+        clickTextWithParentSelectorIfExist("//div[@id='onetrust-button-group-parent']", "Accept all");
+    }
+
     public void testStep(String message) {
         logger.info(String.format("%s : %s", Thread.currentThread().getStackTrace()[1].getMethodName(), message));
     }
+
 }

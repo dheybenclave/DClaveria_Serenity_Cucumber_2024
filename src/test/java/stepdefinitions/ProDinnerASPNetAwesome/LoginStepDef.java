@@ -1,6 +1,8 @@
 package stepdefinitions.ProDinnerASPNetAwesome;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import net.serenitybdd.annotations.WhenPageOpens;
 import net.serenitybdd.core.pages.PageComponent;
 import net.serenitybdd.screenplay.Actor;
 import pages.ProDinnerPage.CommonProDinnerPage;
@@ -19,6 +21,10 @@ public class LoginStepDef extends PageComponent {
 
     String _username, _password = "";
 
+    @WhenPageOpens
+    public void maximiseScreen() {
+        getDriver().manage().window().maximize();
+    }
     @Given("{} is login in {}")
     public void LoginUser(String actor, String page) {
 
@@ -52,6 +58,7 @@ public class LoginStepDef extends PageComponent {
                 break;
         }
     }
+
 
 
 }

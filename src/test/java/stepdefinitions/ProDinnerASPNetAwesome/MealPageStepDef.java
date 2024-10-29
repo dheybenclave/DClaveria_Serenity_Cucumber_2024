@@ -1,12 +1,10 @@
 package stepdefinitions.ProDinnerASPNetAwesome;
 
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Then;
 import net.serenitybdd.core.pages.PageComponent;
-import net.serenitybdd.core.steps.UIInteractions;
 import pages.ProDinnerPage.MealPage;
 import stepdefinitions.CommonStepDef;
-import utils.BaseClass;
 import utils.Utilities;
 
 import java.util.List;
@@ -57,5 +55,5 @@ public class MealPageStepDef extends PageComponent {
         dataTableList.forEach(e -> commonStepDef.verifyTextInPage(e.get("Name"), e.get("Comments")));
     }
 
-       
+
 }

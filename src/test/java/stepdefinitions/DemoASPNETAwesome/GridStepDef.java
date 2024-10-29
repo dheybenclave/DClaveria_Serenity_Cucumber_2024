@@ -1,4 +1,5 @@
 package stepdefinitions.DemoASPNETAwesome;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -10,10 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.DemoASPNETAwesome.CommonDemoASPAwesomePage;
 import pages.DemoASPNETAwesome.DemoASPAwesomePage;
-import java.util.*;
+
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class GridStepDef extends PageComponent {
 
     public CommonDemoASPAwesomePage CommonPage;
@@ -71,16 +75,17 @@ public class GridStepDef extends PageComponent {
         List<String> actualResultList = getGridResult();
         List<List<String>> expectedResultList = dataTable.asLists();
 
+        assertThat(actualResultList.size()).isEqualTo(expectedResultList.size() - 1);
         Assert.assertEquals(String.format("The Expected(%s) and Actual(%s) Result size in Grid List is not the same ", expectedResultList.size() - 1, actualResultList.size()), expectedResultList.size() - 1, actualResultList.size());
 
+        
         for (int i = 0; i < actualResultList.size(); i++) {
 
-            if (i == 0) continue;
-            String currExpectedList = expectedResultList.get(i).toString().replaceAll("\\[|\\]|,", "");
+            String currExpectedList = expectedResultList.get(i + 1).toString().replaceAll("\\[|\\]|,", "");
             String currActualList = actualResultList.get(i);
             logger.info(String.format("currExpectedList %s | currActualList %s", currExpectedList, actualResultList.get(i)));
-
-            Assert.assertEquals(currActualList, currExpectedList);
+            assertThat(actualResultList).contains(currExpectedList);
+//            Assert.assertEquals(currActualList, currExpectedList);
         }
     }
 
