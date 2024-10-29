@@ -48,6 +48,7 @@ public class ContactUsStepDef extends PageComponent {
 
         commonStepDef.clickElement(contactUsPage.LBL_LOCATION_TAB(location));
 
+        
         for (Map<String, String> e : dataTableList) {
             commonStepDef.CollapaseMenu(contactUsPage.BTN_LOCATION_GROUP(e.get("Location")), "open");
             waitABit(2000);
